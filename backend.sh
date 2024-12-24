@@ -56,7 +56,7 @@ npm install &>>log
 lak $? "installing"
 
 #check your repo and path
-cp /home/ec2-user/backend.service /etc/systemd/system/backend.service &>>log
+cp /home/ec2-user/expense-script/backend.service /etc/systemd/system/backend.service &>>log
 lak $? "copied backend service"
 
 systemctl daemon-reload &>>log
