@@ -1,0 +1,50 @@
+#!/bin/bash
+usr=$(id -u)
+time=$(date +%F-%H-%M-%S)
+scriptname=$(echo $0 | cut -d "." -f1)
+log=/tmp/$scriptname-$time.log
+
+u=$(id -u)
+
+lak(){
+    if [ $1 -ne 0 ]
+    then
+        echo "$2 failed"
+    else
+        echo "$2 success"
+    fi
+}
+
+if [ $u -ne 0 ]
+then
+    echo "is this sudo"
+    exit 1
+else    
+    echo "SUDO"
+fi
+
+dnf install nginx -y 
+
+
+systemctl enable nginx
+lak $? "enabling"
+
+systemctl start nginx
+lak $? "starting"
+
+rm -rf /usr/share/nginx/html/*
+lak $? "removing"
+
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+lak $? "adding content"
+
+cd /usr/share/nginx/html
+
+unzip /tmp/frontend.zip
+lak $? "processing"
+
+#check your repo and path
+cp /home/-----
+
+
+
