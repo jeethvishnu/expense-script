@@ -44,7 +44,9 @@ unzip /tmp/frontend.zip
 lak $? "processing"
 
 #check your repo and path
-cp /home/-----
+cp /home/ec2-user/expense-script/expense.conf /etc/nginx/default.d/expense.conf
 
+systemctl restart nginx
+lak $? "restarting"
 
 
